@@ -19,7 +19,7 @@ class FashionmnistTrainer:
 
         self.__load_file()
         self.__build_model()
-        self.__init_weight()
+        # self.__init_weight()
 
         self.min_loss = float('inf')
         self.loss_list, self.acc_list = [], []

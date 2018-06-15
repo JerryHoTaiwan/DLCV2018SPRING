@@ -5,7 +5,7 @@ import os
 
 
 class FashionMNIST(Dataset):
-    def __init__(self, args, mode='train', transform=None):
+    def __init__(self, args, mode='test', transform=None):
         super(FashionMNIST, self).__init__()
         self.args = args
         self.mode = mode
@@ -28,7 +28,7 @@ class FashionMNIST(Dataset):
         else:
             base = self.args.test_dir
             self.image = [np.expand_dims(imread(os.path.join(base, image)), axis=2)
-                          for image in sorted(os.listdir(base)) if image.endswith(".png")]
+                          for image in sorted(os.listdir(base), key=lambda x: int(x[:-4])) if image.endswith(".png")]
             self.label = [0 for _ in range(len(self.image))]
 
     def __getitem__(self, index):
