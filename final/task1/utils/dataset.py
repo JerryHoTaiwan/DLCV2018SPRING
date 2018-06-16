@@ -5,7 +5,7 @@ import os
 
 
 class FashionMNIST(Dataset):
-    def __init__(self, args, mode='test', transform=None):
+    def __init__(self, args, mode='train', transform=None):
         super(FashionMNIST, self).__init__()
         self.args = args
         self.mode = mode
