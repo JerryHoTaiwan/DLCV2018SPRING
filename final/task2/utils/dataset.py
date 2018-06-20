@@ -5,13 +5,16 @@ import os
 
 
 class Cifar100(Dataset):
-    def __init__(self, args, file='novel', mode="test"):
+    def __init__(self, args, file='base', mode='train', transform=None):
         super(Cifar100, self).__init__()
         self.args = args
         self.file = file
         self.mode = mode
+        self.transform = transform
+
         self.image = []
         self.label = []
+
         self.load_file()
 
     def load_file(self):
@@ -26,7 +29,7 @@ class Cifar100(Dataset):
                 train_path = os.path.join(dir, self.mode)
                 image = [np.expand_dims(imread(os.path.join(train_path, image)), axis=2)
                          for image in sorted(os.listdir(train_path)) if image.endswith(".png")]
-                label = [idx for _ in range(len(self.image))]
+                label = [int(dir[-2:]) for _ in range(len(image))]
 
                 self.image.extend(image)
                 self.label.extend(label)
@@ -39,6 +42,7 @@ class Cifar100(Dataset):
 
     def __len__(self):
         return len(self.image)
+
 
 
 if __name__ == "__main__":
