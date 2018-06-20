@@ -9,7 +9,7 @@ import os
 
 
 class Cifar100Task(object):
-    def __init__(self, args):
+    def __init__(self, args, mode='train'):
         super(Cifar100Task, self).__init__()
         folders = [os.path.join(args.train_dir, folder)
                    for folder in sorted(os.listdir(args.train_dir)) if folder.startswith('class')]
@@ -21,13 +21,14 @@ class Cifar100Task(object):
 
         labels = np.array(range(len(class_folders)))
         labels = dict(zip(class_folders, labels))
+        self.map_dict = labels
 
         self.train = []
         self.test = []
         samples = dict()
 
         for c in class_folders:
-            c = os.path.join(c, 'train')
+            c = os.path.join(c, mode)
             temp = [os.path.join(c, x) for x in os.listdir(c)]
 
             samples[c] = random.sample(temp, len(temp))
