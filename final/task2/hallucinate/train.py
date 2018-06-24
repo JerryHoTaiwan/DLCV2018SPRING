@@ -12,6 +12,8 @@ import torch.optim as optim
 from torch.utils import data as Data
 import torchvision
 
+from torchsummary import summary
+
 import ResNetFeat
 import losses
 from modules import base_classifier
@@ -20,7 +22,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description='Main training script')
     #parser.add_argument('--traincfg', required=True, help='yaml file containing config for data')
     #parser.add_argument('--valcfg', required=True, help='yaml file containing config for data')
-    parser.add_argument('--model', default='ResNet18', help='model: ResNet{10|18|34|50}')
+    parser.add_argument('--model', default='ResNet10', help='model: ResNet{10|18|34|50}')
     parser.add_argument('--lr', default=0.1, type=float, help='Initial learning rate')
     parser.add_argument('--momentum', default=0.9, type=float, help='Momentum')
     parser.add_argument('--weight_decay', default=0.0001, type=float, help='Weight decay')
@@ -74,10 +76,14 @@ if __name__ == "__main__":
     BATCH_SIZE = 128
     #model = base_classifier().cuda()
     CELoss = nn.CrossEntropyLoss()
-    loss_fn = losses.GenericLoss(params.aux_loss_type, params.aux_loss_wt, params.num_classes)
+
+    #loss_fn = losses.GenericLoss(params.aux_loss_type, params.aux_loss_wt, params.num_classes)
+    #opt = torch.optim.SGD(model.parameters(), params.lr, momentum=params.momentum, weight_decay=params.weight_decay, dampening=params.dampening)
     opt = optim.Adam(model.parameters(),lr=0.0001,betas=(0.5,0.999))
     best_acc = 0.0
     count = 0
+
+    summary(model,(3,32,32))
 
     for epoch in range(EPOCH):
 
@@ -129,7 +135,7 @@ if __name__ == "__main__":
                 input_X = X_valid[i:(i + BATCH_SIZE)]
                 input_Y = Y_valid[i:(i + BATCH_SIZE)]
             
-            _fv,output = model(input_X.cuda())
+            output,_fv = model(input_X.cuda())
             batch_loss = CELoss(output,input_Y.cuda())
             val_loss += batch_loss.item()
 
