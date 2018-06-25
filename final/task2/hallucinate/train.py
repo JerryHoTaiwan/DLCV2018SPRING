@@ -13,7 +13,7 @@ from torch.utils import data as Data
 import torchvision
 
 import ResNetFeat
-import losses
+# import losses
 from modules import base_classifier
 
 def parse_args():
@@ -74,7 +74,7 @@ if __name__ == "__main__":
     BATCH_SIZE = 128
     #model = base_classifier().cuda()
     CELoss = nn.CrossEntropyLoss()
-    loss_fn = losses.GenericLoss(params.aux_loss_type, params.aux_loss_wt, params.num_classes)
+    # loss_fn = losses.GenericLoss(params.aux_loss_type, params.aux_loss_wt, params.num_classes)
     opt = optim.Adam(model.parameters(),lr=0.0001,betas=(0.5,0.999))
     best_acc = 0.0
     count = 0
