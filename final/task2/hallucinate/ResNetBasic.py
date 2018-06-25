@@ -16,7 +16,7 @@ def init_layer(L):
     # Initialization using fan-in
     if isinstance(L, nn.Conv2d):
         n = L.kernel_size[0]*L.kernel_size[1]*L.out_channels
-        L.weight.data.normal_(0,math.sqrt(2.0/float(n)))
+        L.weight.data.normal_(0,math.sqrt(1.0/float(n)))
     elif isinstance(L, nn.BatchNorm2d):
         L.weight.data.fill_(1)
         L.bias.data.fill_(0)
@@ -28,10 +28,10 @@ class SimpleBlock(nn.Module):
         self.indim = indim
         self.outdim = outdim
         self.C1 = nn.Conv2d(indim, outdim, kernel_size=3, stride=2 if half_res else 1, padding=1, bias=False)
-        self.relu1 = nn.ReLU(inplace=True)
-        self.relu2 = nn.ReLU(inplace=True)
-        self.drop1 = nn.Dropout2d(p=0.4,inplace=False)
-        self.drop2 = nn.Dropout2d(p=0.4,inplace=False)
+        self.relu1 = nn.SELU(inplace=True)
+        self.relu2 = nn.SELU(inplace=True)
+        self.drop1 = nn.Dropout2d(p=0.5,inplace=False)
+        self.drop2 = nn.Dropout2d(p=0.5,inplace=False)
 
         self.BN1 = nn.BatchNorm2d(outdim)
         self.C2 = nn.Conv2d(outdim, outdim,kernel_size=3, padding=1,bias=False)
@@ -64,7 +64,7 @@ class SimpleBlock(nn.Module):
         short_out = x if self.shortcut_type == 'identity' else self.BNshortcut(self.shortcut(x))
         out = out + short_out
         out = self.relu2(out)
-        out = self.drop2(out)
+        #out = self.drop2(out)
 
         return out
 
@@ -129,7 +129,7 @@ class ResNet(nn.Module):
         conv1 = nn.Conv2d(3, 64, kernel_size=7, stride=2, padding=3,
                                                bias=False)
         bn1 = nn.BatchNorm2d(64)
-        relu = nn.ReLU()
+        relu = nn.SELU()
         pool1 = nn.MaxPool2d(kernel_size=3, stride=2, padding=1)
 
         init_layer(conv1)
@@ -141,7 +141,7 @@ class ResNet(nn.Module):
 
         for i in range(4):
             for j in range(list_of_num_layers[i]):
-                half_res = (i>=1) and (j==0)
+                half_res = (i >= 1) and (j == 0)
                 B = block(indim, list_of_out_dims[i], half_res)
                 trunk.append(B)
                 indim = list_of_out_dims[i]
