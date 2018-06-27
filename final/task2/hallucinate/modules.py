@@ -12,6 +12,35 @@ import torch.optim as optim
 from torch.utils import data as Data
 import torchvision 
 
+class feature2classes(nn.Module):
+    def __init__(self,feature_size=512,num_classes=20):
+        super(feature2classes, self).__init__()
+
+        self.fc1 = nn.Linear(feature_size,128)
+        self.fc2 = nn.Linear(128,num_classes)
+        self.bn1 = nn.BatchNorm1d(128)
+        self.dp = nn.Dropout(0.5)
+        self.relu = nn.ReLU(inplace=True)
+
+        for m in self.modules():
+            if isinstance(m,nn.Linear):
+                size = m.weight.size()
+                fan_in = size[0]
+                fan_out = size[1]
+                n = fan_in + fan_out
+                m.weight.data.normal_(0,math.sqrt(2./n))
+            if isinstance(m,nn.BatchNorm1d):
+                m.weight.data.fill_(1)
+                m.bias.data.zero_()
+
+    def forward(self,fv):
+        out = self.fc1(fv)
+        out = self.bn1(out)
+        out = self.relu(out)
+        out = self.dp(out)
+        out = self.fc2(out)
+        return out
+
 class base_classifier(nn.Module):
     def __init__(self):
         super(base_classifier, self).__init__()
