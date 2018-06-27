@@ -17,6 +17,8 @@ from torchsummary import summary
 from modules import feature2classes
 
 if __name__ == '__main__':
+    data_dir = sys.argv[1]
+    model_dir = sys.argv[2]
     model = feature2classes().cuda()
     EPOCH = 500
     PATIENCE = 30
@@ -27,10 +29,10 @@ if __name__ == '__main__':
     best_acc = 0.0
     count = 0
 
-    X_train = torch.from_numpy(np.load("../data/x_feature_train.npy").astype(np.float32)).view(-1,512)
-    Y_train = torch.from_numpy(np.load("../data/y_feature_train.npy").astype(np.long)).view(-1)
-    X_valid = torch.from_numpy(np.load("../data/x_feature_valid.npy").astype(np.float32)).view(-1,512)
-    Y_valid = torch.from_numpy(np.load("../data/y_feature_valid.npy").astype(np.long)).view(-1)
+    X_train = torch.from_numpy(np.load(join(data_dir,'x_feature_train.npy')).astype(np.float32)).view(-1,512)
+    Y_train = torch.from_numpy(np.load(join(data_dir,'x_feature_train.npy')).astype(np.long)).view(-1)
+    X_valid = torch.from_numpy(np.load(join(data_dir,'x_feature_train.npy')).astype(np.float32)).view(-1,512)
+    Y_valid = torch.from_numpy(np.load(join(data_dir,'x_feature_train.npy')).astype(np.long)).view(-1)
 
     print (Y_train[-1],Y_valid[-1])
 
@@ -96,7 +98,7 @@ if __name__ == '__main__':
         if (val_acc > best_acc):
             count = 0
             best_acc = val_acc
-            torch.save(model, '../models/FV_trained.pkl')
+            torch.save(model, join(model_dir,'FV_trained.pkl'))
         else:
             count += 1
         if (count == PATIENCE):
