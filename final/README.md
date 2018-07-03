@@ -52,3 +52,4 @@
         After execution, there will be a file called `result.csv`
    
    * Task 2:
+        * Please access to /task2/reproduce for detailed information
