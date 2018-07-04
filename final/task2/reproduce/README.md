@@ -28,7 +28,7 @@
    After the execution, a `.csv` file of prediction will be generated, which would be names as `predict_k.csv` for k shot problem.
 
 
-##Result
+## Result
     
    * the score of our prediction on kaggle   
         
