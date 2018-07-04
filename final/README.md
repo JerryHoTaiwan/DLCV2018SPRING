@@ -52,4 +52,4 @@
         After execution, there will be a file called `result.csv`
    
    * Task 2:
-        * Please access to task2/reproduce for detailed information [link](https://github.com/chinchengwu/DLCV2018SPRING/tree/master/final/task2/reproduce)
+        * Please access to task2/reproduce for detailed information ([link](https://github.com/chinchengwu/DLCV2018SPRING/tree/master/final/task2/reproduce))
