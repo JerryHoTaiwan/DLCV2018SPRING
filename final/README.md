@@ -46,7 +46,12 @@
       * For Kaggle results, execute the script `task1.sh` for download model and inference the result
         
         ```
-            bash task1.sh
+            bash task1.sh <train directory> <test directory>
+        ```
+        
+        Example: the path is same as listed above.
+        ```
+            bash task1.sh datasets/Fashion_MNIST_student/train datasets/Fashion_MNIST_student/test
         ```
         
         After execution, there will be a file called `result.csv`
