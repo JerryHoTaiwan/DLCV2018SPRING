@@ -31,6 +31,11 @@
 ##Result
     
    * the score of our prediction on kaggle   
-        | 1-shot | 0.34700 |
-        | 5-shot | 0.51600 |
-        | 10-shot| 0.53200 |
+        
+        
+        k-shot    | accuracy  |
+        --------- | ----------
+        1         | 0.34700 
+        5         | 0.51600
+        10        | 0.53200
+        
