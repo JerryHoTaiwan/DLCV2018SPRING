@@ -38,9 +38,9 @@
       * For testing, please check the argument listed in `inference.py`
       
         ```
-            python3 train.py --train-dir datasets/Fashion_MNIST_student/train
-                             --test-dir datasets/Fashion_MNIST_student/test
-                             --checkpoint checkpoints/fashion_mnist/best_checkpoint.pth.tar
+            python3 inference.py --train-dir datasets/Fashion_MNIST_student/train
+                                 --test-dir datasets/Fashion_MNIST_student/test
+                                 --checkpoint checkpoints/fashion_mnist/best_checkpoint.pth.tar
         ``` 
       
       * For Kaggle results, execute the script `task1.sh` for download model and inference the result
