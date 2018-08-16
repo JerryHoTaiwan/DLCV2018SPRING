@@ -7,7 +7,15 @@ image size:
 ## Usage
 
 #### Preprocessing
-If the user only want to evaluate the result of current DL methods, please skip the preprocessing
+If you only want to evaluate the result of current DL methods, please skip the preprocessing<br>
+If you have already generated new .flo files under new algorithm: python flo2npy.py  --data_path [the path of .flo files] --npy_name [the path you save .npy files] --down_sample [the scale of downsampling (default = 1)] ... for .flo files<br>
+If you have already generated new .png files under new algorithm:python png2npy.py --data_path [the path of .flo files] --npy_name [the path you save .npy files] --down_sample [the scale of downsampling (default = 1)] ... for .png files<br>
+
+* the parameter 'down_sample' means the different of scale between .flo files and .raw files. For example, if my .flo files are sized of 1024x384, this parameter should be set 2.
+* For those who used .png files, make sure the calibration is correct in line 68 in png2npy.py. 
+
+#### Evaluation
+
 
 #### The list of DL algorithms for comparison
 ```
@@ -27,5 +35,6 @@ If the user only want to evaluate the result of current DL methods, please skip 
 13 MTD_method_1<br>
 14 MTD_method_2<br>
 ```
+
 Jerry<br>
 contact: b04507009@ntu.edu.tw
