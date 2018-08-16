@@ -1,4 +1,4 @@
-The Python evaluation tool for PDAF algorithm [Final version]
+The Python evaluation tool for PDAF algorithms [Final version]
 =================================
 ## Setup
 required external package: pillow, numpy, scipy, matplotlib, pandas, opencv-python (hope the version is fine)
@@ -6,7 +6,11 @@ image size:
 
 ## Usage
 
-### The list of DL algorithms for comparison
+#### Preprocessing
+If the user only want to evaluate the result of current DL methods, please skip the preprocessing
+
+#### The list of DL algorithms for comparison
+```
 0 11_f2sd_bilinear__1024x384_areaResize<br>
 1 12_f2sd_bilinear_flow3__1024x384<br>
 2 14_f2sd_2x_bilinear__1024x384<br>
@@ -22,6 +26,6 @@ image size:
 12 10_f2sd_4x_bilinear__2048x768_resize<br>
 13 MTD_method_1<br>
 14 MTD_method_2<br>
-
+```
 Jerry<br>
 contact: b04507009@ntu.edu.tw
