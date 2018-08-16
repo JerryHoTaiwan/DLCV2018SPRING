@@ -7,12 +7,12 @@ image size:
 ## Usage
 
 #### Preprocessing
-If you only want to evaluate the result of current DL methods, please skip the preprocessing<br>
-If you have already generated new .flo files under new algorithm: python flo2npy.py  --data_path [the path of .flo files] --npy_name [the path you save .npy files] --down_sample [the scale of downsampling (default = 1)] ... for .flo files<br>
-If you have already generated new .png files under new algorithm:python png2npy.py --data_path [the path of .flo files] --npy_name [the path you save .npy files] --down_sample [the scale of downsampling (default = 1)] ... for .png files<br>
+* If you only want to evaluate the result of current DL methods, please skip the preprocessing
+* If you have already generated new .flo files under new algorithm: python flo2npy.py  --data_path [the path of .flo files] --npy_name [the path you save .npy files] --down_sample [the scale of downsampling (default = 1)] ... for .flo files
+* If you have already generated new .png files under new algorithm:python png2npy.py --data_path [the path of .flo files] --npy_name [the path you save .npy files] --down_sample [the scale of downsampling (default = 1)] ... for .png files
 
-* the parameter 'down_sample' means the different of scale between .flo files and .raw files. For example, if my .flo files are sized of 1024x384, this parameter should be set 2.
-* For those who used .png files, make sure the calibration is correct in line 68 in png2npy.py. 
+the parameter 'down_sample' means the variance of scale between .flo files and .raw files. For example, if my .flo files are sized of 1024x384, this parameter should be set 2 since the size of raw file is 2048_768.<br>
+For those who used .png files, make sure the calibration is correct in line 68 in png2npy.py. 
 
 #### Evaluation
 
